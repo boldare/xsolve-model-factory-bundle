@@ -1,0 +1,28 @@
+{
+    "name": "xsolve/model-factory-bundle",
+    "type": "symfony-bundle",
+    "description": "This Bundle provides a skeleton for model factories.",
+    "keywords": ["rest"],
+    "homepage": "http://github.com/xsolve-pl",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mariusz Bąk",
+            "email": "mariusz.alef.bak@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "sensio/framework-extra-bundle": "^3.0",
+        "phpunit/phpunit": "^5.5",
+        "symfony/phpunit-bridge": "^3.1"
+    },
+    "require": {
+        "php": "^5.6",
+        "symfony/framework-bundle": "^3.1"
+    },
+    "autoload":{
+        "psr-4":{
+            "Xsolve\\ModelFactoryBundle\\": ""
+        }
+    }
+}
