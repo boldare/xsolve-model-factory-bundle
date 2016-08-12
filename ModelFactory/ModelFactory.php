@@ -4,6 +4,8 @@ namespace Xsolve\ModelFactoryBundle\ModelFactory;
 
 use InvalidArgumentException;
 use Traversable;
+use Xsolve\ModelFactoryBundle\ModelFactory\Exception\ModelFactoryException;
+use Xsolve\ModelFactoryBundle\ModelFactoryCollection\Exception\ModelFactoryCollectionException;
 
 abstract class ModelFactory implements ModelFactoryInterface
 {
@@ -18,7 +20,7 @@ abstract class ModelFactory implements ModelFactoryInterface
     public function supportsObjects($objects)
     {
         if (!is_array($objects) && !$objects instanceof Traversable) {
-            throw new InvalidArgumentException();
+            throw new ModelFactoryException();
         }
         foreach ($objects as $object) {
             if (!$this->supportsObject($object)) {
