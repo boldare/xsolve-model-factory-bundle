@@ -3,6 +3,7 @@
 namespace Xsolve\ModelFactoryBundle\ModelFactory;
 
 use Traversable;
+use Xsolve\ModelFactoryBundle\ModelFactoryCollection\Exception\ModelFactoryCollectionException;
 
 interface ModelFactoryInterface
 {
@@ -24,6 +25,8 @@ interface ModelFactoryInterface
      * @param array|Traversable $objects
      *
      * @return mixed
+     *
+     * @throws ModelFactoryCollectionException
      */
     public function createModels($objects);
 

@@ -36,6 +36,7 @@ class ModelFactoryAwareModelTest extends PHPUnit_Framework_TestCase
     {
         $bazModelFactory = new BazModelFactory(new VolumetricWeightHelper(5000, 2));
 
+        /* @var Baz[] $bazs */
         $bazs = [
             new Baz('baz.1', 1.0, 0.2, 0.2, 0.2),
             new Baz('baz.2', 1.0, 0.3, 0.5, 0.11111),
@@ -45,9 +46,13 @@ class ModelFactoryAwareModelTest extends PHPUnit_Framework_TestCase
 
         $bazModels = $bazModelFactory->createModels($bazs);
 
-        $this->assertTrue($bazModels[0] instanceof BazModel);
-        $this->assertTrue($bazModels[1] instanceof BazModel);
         /* @var BazModel[] $bazModels */
+        foreach ($bazs as $index => $baz) {
+            $bazModel = $bazModels[$index];
+            $this->assertTrue($bazModel instanceof BazModel);
+            $this->assertEquals($baz->getId(), $bazModel->getId());
+            $this->assertEquals($baz->getWeight(), $bazModel->getWeight());
+        }
         $this->assertEquals(40.0, $bazModels[0]->getVolumetricWeight());
         $this->assertEquals(83.33, $bazModels[1]->getVolumetricWeight());
     }

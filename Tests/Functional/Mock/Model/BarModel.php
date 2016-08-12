@@ -30,11 +30,11 @@ class BarModel implements ModelFactoryCollectionAwareModelInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getName()
+    public function getValue()
     {
-        return $this->bar->getName();
+        return $this->bar->getValue();
     }
 
     /**

@@ -6,6 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Traversable;
 use Xsolve\ModelFactoryBundle\ModelFactory\ModelFactoryInterface;
+use Xsolve\ModelFactoryBundle\ModelFactoryCollection\Exception\ModelFactoryCollectionException;
 
 class ModelFactoryCollection implements ModelFactoryCollectionInterface
 {
@@ -72,7 +73,7 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
         foreach ($objects as $object) {
             $modelFactory = $this->findSupportingModelFactoryForObject($object);
             if (!$modelFactory instanceof ModelFactoryInterface) {
-                throw new Exception(sprintf(
+                throw new ModelFactoryCollectionException(sprintf(
                     "Model factory for class '%s' not found.",
                     get_class($object)
                 ));
