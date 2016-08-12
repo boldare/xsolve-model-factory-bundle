@@ -1,6 +1,5 @@
 /phpunit.xml
 /vendor/
-/script/
 /composer.lock
 /composer.phar
 /coverage/

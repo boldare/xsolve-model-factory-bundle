@@ -79,6 +79,7 @@ class ModelFactoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param mixed $invalidArgument
      * @dataProvider dataProvider_supportsObjects_onInvalidArgument
      * @expectedException \Xsolve\ModelFactoryBundle\ModelFactory\Exception\ModelFactoryException
      */

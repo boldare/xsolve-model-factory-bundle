@@ -42,6 +42,12 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
      */
     public function supportsObjects($objects)
     {
+        if ($objects instanceof Traversable) {
+            $objects = iterator_to_array($objects);
+        } elseif (!is_array($objects)) {
+            throw new ModelFactoryCollectionException('An array or an instance of Traversable expected.');
+        }
+
         foreach ($objects as $object) {
             if (!$this->supportsObject($object)) {
                 return false;
@@ -59,7 +65,7 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
         if ($objects instanceof Traversable) {
             $objects = iterator_to_array($objects);
         } elseif (!is_array($objects)) {
-            throw new InvalidArgumentException('An array or an instance of Traversable expected.');
+            throw new ModelFactoryCollectionException('An array or an instance of Traversable expected.');
         }
 
         // First try to find a single model factory supporting all items.
