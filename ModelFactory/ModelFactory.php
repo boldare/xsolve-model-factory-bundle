@@ -2,10 +2,8 @@
 
 namespace Xsolve\ModelFactoryBundle\ModelFactory;
 
-use InvalidArgumentException;
 use Traversable;
 use Xsolve\ModelFactoryBundle\ModelFactory\Exception\ModelFactoryException;
-use Xsolve\ModelFactoryBundle\ModelFactoryCollection\Exception\ModelFactoryCollectionException;
 
 abstract class ModelFactory implements ModelFactoryInterface
 {

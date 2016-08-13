@@ -15,7 +15,7 @@ class Bar
 
     /**
      * @param string $id
-     * @param int $value
+     * @param int    $value
      */
     public function __construct($id, $value)
     {
@@ -41,6 +41,7 @@ class Bar
 
     /**
      * @param Baz $baz
+     *
      * @return $this
      */
     public function addBaz(Baz $baz)

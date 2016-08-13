@@ -21,10 +21,10 @@ class Baz implements WeightInterface, VolumeInterface
 
     /**
      * @param string $id
-     * @param float $weight
-     * @param float $length
-     * @param float $width
-     * @param float $height
+     * @param float  $weight
+     * @param float  $length
+     * @param float  $width
+     * @param float  $height
      */
     public function __construct($id, $weight, $length, $width, $height)
     {

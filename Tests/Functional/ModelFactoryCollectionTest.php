@@ -5,13 +5,10 @@ namespace Xsolve\ModelFactoryBundle\Tests\Functional;
 use ArrayObject;
 use PHPUnit_Framework_TestCase;
 use stdClass;
-use Xsolve\ModelFactoryBundle\ModelFactoryCollection\Exception\ModelFactoryCollectionException;
 use Xsolve\ModelFactoryBundle\ModelFactoryCollection\ModelFactoryCollection;
-use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Helper\VolumetricWeightHelper;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Model\BarModel;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Model\FooModel;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\ModelFactory\BarModelFactory;
-use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\ModelFactory\BazModelFactory;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\ModelFactory\FooModelFactory;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Object\Bar;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Object\Baz;
@@ -69,7 +66,6 @@ class ModelFactoryCollectionTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($modelFactoryCollection->supportsObjects(new ArrayObject([$foo, $baz])));
         $this->assertFalse($modelFactoryCollection->supportsObjects(new ArrayObject([$bar, $baz])));
         $this->assertFalse($modelFactoryCollection->supportsObjects(new ArrayObject([$foo, $bar, $baz])));
-
     }
 
     public function test_createModels()

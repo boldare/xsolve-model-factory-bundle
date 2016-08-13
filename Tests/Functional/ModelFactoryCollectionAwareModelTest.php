@@ -2,10 +2,7 @@
 
 namespace Xsolve\ModelFactoryBundle\Tests\Functional;
 
-use ArrayObject;
-use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
-use stdClass;
 use Xsolve\ModelFactoryBundle\ModelFactoryCollection\ModelFactoryCollection;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Helper\VolumetricWeightHelper;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Model\BarModel;

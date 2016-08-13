@@ -3,7 +3,6 @@
 namespace Xsolve\ModelFactoryBundle\Tests\Functional\Mock\ModelFactory;
 
 use Xsolve\ModelFactoryBundle\ModelFactory\ModelFactory;
-use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Helper\VolumetricWeightHelper;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Model\FooModel;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Object\Foo;
 
@@ -19,6 +18,7 @@ class FooModelFactory extends ModelFactory
 
     /**
      * @param Foo $object
+     *
      * @return FooModel
      */
     protected function instantiateModel($object)

@@ -30,6 +30,7 @@ class BazModelFactory extends ModelFactory
 
     /**
      * @param Baz $object
+     *
      * @return float
      */
     public function getBazVolumetricWeight(Baz $object)
@@ -39,6 +40,7 @@ class BazModelFactory extends ModelFactory
 
     /**
      * @param Baz $object
+     *
      * @return BazModel
      */
     protected function instantiateModel($object)

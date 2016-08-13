@@ -39,9 +39,9 @@ class Foo
         return $this->name;
     }
 
-
     /**
      * @param Bar $bar
+     *
      * @return $this
      */
     public function addBar(Bar $bar)

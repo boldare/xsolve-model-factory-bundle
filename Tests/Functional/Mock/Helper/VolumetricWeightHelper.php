@@ -14,7 +14,7 @@ class VolumetricWeightHelper
 
     /**
      * @param float $weightToVolumeCoef
-     * @param int $precision
+     * @param int   $precision
      */
     public function __construct($weightToVolumeCoef, $precision)
     {

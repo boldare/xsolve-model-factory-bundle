@@ -2,18 +2,11 @@
 
 namespace Xsolve\ModelFactoryBundle\Tests\Functional;
 
-use ArrayObject;
-use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
-use stdClass;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Helper\VolumetricWeightHelper;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Model\BazModel;
-use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\ModelFactory\BarModelFactory;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\ModelFactory\BazModelFactory;
-use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\ModelFactory\FooModelFactory;
-use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Object\Bar;
 use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Object\Baz;
-use Xsolve\ModelFactoryBundle\Tests\Functional\Mock\Object\Foo;
 
 class ModelFactoryAwareModelTest extends PHPUnit_Framework_TestCase
 {
