@@ -26,13 +26,7 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
      */
     public function supportsObject($object)
     {
-        foreach ($this->modelFactories as $modelFactory) {
-            if ($modelFactory->supportsObject($object)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->findSupportingModelFactoryForObject($object) instanceof ModelFactoryInterface;
     }
 
     /**
@@ -44,6 +38,10 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
             $objects = iterator_to_array($objects);
         } elseif (!is_array($objects)) {
             throw new ModelFactoryCollectionException('An array or an instance of Traversable expected.');
+        }
+
+        if ($this->findSupportingModelFactoryForObjects($objects) instanceof ModelFactoryInterface) {
+            return true;
         }
 
         foreach ($objects as $object) {
@@ -83,12 +81,6 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
                 ));
             }
             $models[] = $this->createModelAndSetDependencies($modelFactory, $object);
-        }
-
-        foreach ($models as $model) {
-            if ($model instanceof ModelFactoryCollectionAwareModelInterface) {
-                $model->setModelFactoryCollection($this);
-            }
         }
 
         return $models;
@@ -147,6 +139,8 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
                 return $modelFactory;
             }
         }
+
+        return;
     }
 
     /**
@@ -161,5 +155,7 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
                 return $modelFactory;
             }
         }
+
+        return;
     }
 }

@@ -1,3 +1,13 @@
+Introduction
+============
+
+This bundle provides a versatile skeleton for organizing model factories.
+It can be used to provide objects that will be later on passed to some
+serializer and returned via API, or some adapters or facades for your objects
+before they are handed over to some other libraries or bundles. It aims to
+empower models so that they can easily get access to some services or create
+nested models lazily without requiring much work upfront.
+
 Getting started
 ===============
 
@@ -33,7 +43,7 @@ class AppKernel extends Kernel
 }
 ```
 
-That's all and now you're ready to go!
+That's all - now you're ready to go!
 
 
 Usage examples
@@ -72,7 +82,7 @@ class FooModelFactory extends ModelFactory
     {
         return ($object instanceof Foo);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -121,7 +131,7 @@ class BazModelFactory extends ModelFactory
      * @var VolumetricWeightCalculator
      */
     protected $volumetricWeightCalculator;
-    
+
     /**
      * @param VolumetricWeightCalculator $volumetricWeightCalculator
      */
@@ -129,7 +139,7 @@ class BazModelFactory extends ModelFactory
     {
         $this->volumetricWeightCalculator = $volumetricWeightCalculator;
     }
-    
+
     /**
      * @return VolumetricWeightCalculator
      */
@@ -137,7 +147,7 @@ class BazModelFactory extends ModelFactory
     {
         return $this->volumetricWeightCalculator;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -145,7 +155,7 @@ class BazModelFactory extends ModelFactory
     {
         return ($object instanceof Baz);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -167,14 +177,17 @@ used here to provide convenient `setModelFactory` and `getModelFactory` methods)
 namespace Example;
 
 use Xsolve\ModelFactoryBundle\ModelFactory\ModelFactoryAwareModelInterface;
+use Xsolve\ModelFactoryBundle\ModelFactory\ModelFactoryAwareModelTrait;
 
 class BazModel implements ModelFactoryAwareModelInterface
 {
+    use ModelFactoryAwareModelTrait;
+
     /**
      * @var Baz
      */
     protected $baz;
-    
+
     /**
      * @param Baz $baz
      */
@@ -182,7 +195,7 @@ class BazModel implements ModelFactoryAwareModelInterface
     {
         $this->baz = $baz;
     }
-    
+
     /**
      * @return float
      */
@@ -190,7 +203,7 @@ class BazModel implements ModelFactoryAwareModelInterface
     {
         return ($this->baz->getLength() * $this->baz->getWidth() * $this->baz->getHeight());
     }
-    
+
     /**
      * @return float
      */
@@ -203,3 +216,134 @@ class BazModel implements ModelFactoryAwareModelInterface
     }
 }
 ```
+
+Grouping model factories into collections
+-----------------------------------------
+
+To make it easy to produce models for multiple objects it is possible to
+group model factories into collections. If your application provides multiple
+API (or multiple API versions that are so different that they utilize
+completely different models) you are able to group factories in separate
+collections and avoid the risk of producing incorrect models.
+
+Basic implementation of model factory collection is provided in
+`Xsolve\ModelFactoryBundle\ModelFactoryCollection\ModelFactoryCollection`
+class. It allows to register multiple model factories via its
+'addModelFactory` method and provides same interface as a single
+model factory, so that it is completely interchangable. Its methods attempt
+to find appropriate model factory for each object provided.
+
+Grouping model factories into collections is made easier by providing
+a dedicated compiler pass that uses tags on model factory service definitions
+to inject them into appropriate collections. Consider following example of
+`services.xml` file:
+
+```xml
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="example.model_factory_collection.first"
+                 class="Xsolve\ModelFactoryBundle\ModelFactoryCollection\\ModelFactoryCollection\"
+        />
+
+        <service id="example.model_factory_collection.second"
+                 class="Xsolve\ModelFactoryBundle\ModelFactoryCollection\\ModelFactoryCollection\"
+        />
+
+        <service id="example.model_factory.foo"
+                 class="Example\FooModelFactory"
+        >
+            <tag name="xsolve.model_factory_bundle.model_factory"
+                 model-factory-collection-id="example.model_factory_collection.first"
+            />
+            <tag name="xsolve.model_factory_bundle.model_factory"
+                 model-factory-collection-id="example.model_factory_collection.second"
+            />
+        </service>
+
+    </services>
+
+</container>
+```
+
+This snippet defines two model factory collections (with ids
+`example.model_factory_collection.first` and
+`example.model_factory_collection.second` respectively). It also defines a
+single model factory (with id `example.model_factory.foo`). This service has a
+tag assigned with `name` attribute equal
+`xsolve.model_factory_bundle.model_factory` (which will result in it being
+processed by
+`Xsolve\ModelFactoryBundle\DependencyInjection\CompilerPass\ModelFactoryCollectionCompilerPass`)
+and `model-factory-collection-id` attribute containing service ids of
+respective collections.
+
+Producing models inside other models
+------------------------------------
+
+In some cases the models you would like to produce can contain other models
+(e.g. produced for objects associated with the root object). If this nesting
+is deep (as it may be for some APIs optimized for SPA applications that aim
+to reduce number of requests required to fetch data) it becomes tedious to
+build all models upfront and connect them in a proper way. An easier solution
+is to empower models to be able to produce nested models on their own via the
+same model factory collection that was used to instantiate themselves.
+
+To achieve this your model may implement
+`Xsolve\ModelFactoryBundle\ModelFactoryCollection\ModelFactoryCollectionAwareModelInterface`
+which will result in model factory collection that was used to create the model
+to be injected to it. The basic implementation of this interface is provided in
+`Xsolve\ModelFactoryBundle\ModelFactoryCollection\ModelFactoryCollectionAwareModelTrait`.
+
+Let's assume that previously presented `Example\Foo` class object contains a
+property containing an array of `Example\Baz` class objects and we want this
+association to be carried to model objects as well. If both `Example\FooModelFactory`
+and `Example\BazModelFactory` are a part of the same model factory collection
+and instances of `Example\FooModel` class are instantiated via collections
+`createModel` or `createModels` methods of this collection, implementation of
+`Example\FooModel` class could look as follows:
+
+```php
+<?php
+
+namespace Example;
+
+use Xsolve\ModelFactoryBundle\ModelFactoryCollection\ModelFactoryCollectionAwareModelInterface;
+use Xsolve\ModelFactoryBundle\ModelFactoryCollection\ModelFactoryCollectionAwareModelTrait;
+
+class FooModel implements ModelFactoryCollectionAwareModelInterface
+{
+    use ModelFactoryCollectionAwareModelTrait;
+
+    /**
+     * @var Foo
+     */
+    protected $foo;
+
+    /**
+     * @param Foo $foo
+     */
+    public function __construct(Foo $foo)
+    {
+        $this->foo = $foo;
+    }
+
+    /**
+     * @return BazModel[]
+     */
+    public function getBazs()
+    {
+        return $this
+            ->getModelFactoryCollection()
+            ->createModels($this->foo->getBazs());
+    }
+}
+```
+
+Of course if `Example\BazModel` implements the same interface it will also be
+injected with the same model factory collection and will be able to produce
+models for nested objects - it's as easy as that!

@@ -1,14 +1,16 @@
 {
-    "name": "xsolve/model-factory-bundle",
+    "name": "xsolve-pl/model-factory-bundle",
     "type": "symfony-bundle",
-    "description": "This Bundle provides a skeleton for model factories.",
+    "description": "This bundle provides a versatile skeleton for organizing model factories.",
     "keywords": ["rest"],
-    "homepage": "http://github.com/xsolve-pl",
+    "homepage": "http://github.com/xsolve-pl/xsolve-model-factory-bundle",
     "license": "MIT",
     "authors": [
         {
             "name": "Mariusz Bąk",
-            "email": "mariusz.alef.bak@gmail.com"
+            "email": "mariusz.alef.bak@gmail.com",
+            "homepage": "http://github.com/malef",
+            "role": "Developer"
         }
     ],
     "require": {
