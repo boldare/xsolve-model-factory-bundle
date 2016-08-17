@@ -2,11 +2,18 @@ Introduction
 ============
 
 This bundle provides a versatile skeleton for organizing model factories.
+
 It can be used to provide objects that will be later on passed to some
 serializer and returned via API, or some adapters or facades for your objects
-before they are handed over to some other libraries or bundles. It aims to
-empower models so that they can easily get access to some services or create
-nested models lazily without requiring much work upfront.
+before they are handed over to some other libraries or bundles.
+
+It aims to empower models so that they can easily get access to some services or
+create nested models lazily without requiring much work upfront.
+
+License
+=======
+
+This bundle is under the MIT license. See the complete license in `LICENSE` file.
 
 Getting started
 ===============
