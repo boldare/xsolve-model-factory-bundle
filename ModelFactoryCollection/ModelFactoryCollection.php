@@ -58,9 +58,7 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
      */
     public function createModels($objects)
     {
-        if ($objects instanceof Traversable) {
-            $objects = iterator_to_array($objects);
-        } elseif (!is_array($objects)) {
+        if (!$objects instanceof Traversable && !is_array($objects)) {
             throw new ModelFactoryCollectionException('An array or an instance of Traversable expected.');
         }
 
@@ -72,7 +70,7 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
 
         // If that fails, try to find model factory for each item individually.
         $models = [];
-        foreach ($objects as $object) {
+        foreach ($objects as $key => $object) {
             $modelFactory = $this->findSupportingModelFactoryForObject($object);
             if (!$modelFactory instanceof ModelFactoryInterface) {
                 throw new ModelFactoryCollectionException(sprintf(
@@ -80,7 +78,7 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
                     get_class($object)
                 ));
             }
-            $models[] = $this->createModelAndSetDependencies($modelFactory, $object);
+            $models[$key] = $this->createModelAndSetDependencies($modelFactory, $object);
         }
 
         return $models;
@@ -98,11 +96,11 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
 
     /**
      * @param ModelFactoryInterface $modelFactory
-     * @param array                 $objects
+     * @param array|Traversable     $objects
      *
      * @return array
      */
-    protected function createModelsAndSetDependencies(ModelFactoryInterface $modelFactory, array $objects)
+    protected function createModelsAndSetDependencies(ModelFactoryInterface $modelFactory, $objects)
     {
         $models = $modelFactory->createModels($objects);
         foreach ($models as $model) {

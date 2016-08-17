@@ -251,7 +251,11 @@ class ModelFactoryCollectionTest extends PHPUnit_Framework_TestCase
                     }
 
                     return array_combine(
-                        array_keys($args[0]),
+                        array_keys(
+                            is_array($args[0])
+                                ? $args[0]
+                                : iterator_to_array($args[0])
+                        ),
                         $models
                     );
                 }
@@ -314,7 +318,11 @@ class ModelFactoryCollectionTest extends PHPUnit_Framework_TestCase
                     }
 
                     return array_combine(
-                        array_keys($args[0]),
+                        array_keys(
+                            is_array($args[0])
+                                ? $args[0]
+                                : iterator_to_array($args[0])
+                        ),
                         $models
                     );
                 }
@@ -377,7 +385,11 @@ class ModelFactoryCollectionTest extends PHPUnit_Framework_TestCase
                     }
 
                     return array_combine(
-                        array_keys($args[0]),
+                        array_keys(
+                            is_array($args[0])
+                                ? $args[0]
+                                : iterator_to_array($args[0])
+                        ),
                         $models
                     );
                 }
@@ -450,6 +462,23 @@ class ModelFactoryCollectionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             [$fooModelsMap->offsetGet($foos[0]), $barModelsMap->offsetGet($bars[1])],
             $modelFactoryCollection->createModels([$foos[0], $bars[1]])
+        );
+
+        $this->assertEquals(
+            ['a' => $fooModelsMap->offsetGet($foos[0])],
+            $modelFactoryCollection->createModels(['a' => $foos[0]])
+        );
+        $this->assertEquals(
+            ['a' => $fooModelsMap->offsetGet($foos[0]), 'b' => $fooModelsMap->offsetGet($foos[1])],
+            $modelFactoryCollection->createModels(['a' => $foos[0], 'b' => $foos[1]])
+        );
+        $this->assertEquals(
+            ['a' => $barModelsMap->offsetGet($bars[0]), 'b' => $barModelsMap->offsetGet($bars[1])],
+            $modelFactoryCollection->createModels(['a' => $bars[0], 'b' => $bars[1]])
+        );
+        $this->assertEquals(
+            ['a' => $fooModelsMap->offsetGet($foos[0]), 'b' => $barModelsMap->offsetGet($bars[1])],
+            $modelFactoryCollection->createModels(['a' => $foos[0], 'b' => $bars[1]])
         );
 
         $this->assertEquals(

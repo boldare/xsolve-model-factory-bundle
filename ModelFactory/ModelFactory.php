@@ -45,10 +45,12 @@ abstract class ModelFactory implements ModelFactoryInterface
      */
     public function createModels($objects)
     {
-        return array_map(
-            [$this, 'createModel'],
-            $objects
-        );
+        $models = [];
+        foreach ($objects as $key => $object) {
+            $models[$key] = $this->createModel($object);
+        }
+
+        return $models;
     }
 
     /**
