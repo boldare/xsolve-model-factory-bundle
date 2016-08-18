@@ -7,7 +7,7 @@ php:
 branches:
   only:
     - master
-    - /^\d+\.\d+\.\d+$/
+    - /^v\d+\.\d+\.\d+$/
 
 cache:
   directories:
