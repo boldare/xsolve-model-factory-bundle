@@ -180,7 +180,7 @@ class BazModelFactory extends ModelFactory
     /**
      * {@inheritdoc}
      */
-    public function instantiateModel($object)
+    protected function instantiateModel($object)
     {
         /* @var Baz $object */
         return new BazModel($object);
