@@ -1,3 +1,15 @@
+Table of contents
+=================
+
+  * [Introduction](#introduction)
+  * [License](#license)
+  * [Getting started](#getting-started)
+  * [Usage examples](#usage-examples)
+    * [Implementing model factory](#implementing-model-factory)
+    * [Using external dependencies in model](#using-external-dependencies-in-model)
+    * [Grouping model factories into collections](#grouping-model-factories-into-collections)
+    * [Producing models inside other models](#producing-models-inside-other-models)
+
 Introduction
 ============
 
