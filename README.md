@@ -36,7 +36,7 @@ Include this bundle in your Symfony 3 project using Composer as follows
 (assuming it is installed globally):
 
 ```bash
-$ composer require xsolve/model-factory-bundle
+$ composer require xsolve-pl/model-factory-bundle
 ```
 
 For more information on Composer see its
