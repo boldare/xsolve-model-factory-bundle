@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/xsolve-pl/xsolve-model-factory-bundle.svg?branch=master)](https://travis-ci.org/xsolve-pl/xsolve-model-factory-bundle)
+
 Table of contents
 =================
 
