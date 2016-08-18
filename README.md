@@ -83,9 +83,9 @@ more details.
 One you are free to implement this interface with your own model factory
 classes, a basic abstract class for model factory is included as well in
 `Xsolve\ModelFactoryBundle\ModelFactory\ModelFactory`. It includes all the
-necessary logic and leaves out only `supportsObject` and `instantiateModel`
-methods. Using it as a base class creating a new model factory class becomes
-very easy:
+necessary logic and leaves out only a public `supportsObject` method and a
+protected `instantiateModel` method to be implemented. Using it as a base
+class creating a new model factory class becomes very easy:
 
 ```php
 <?php
@@ -107,7 +107,7 @@ class FooModelFactory extends ModelFactory
     /**
      * {@inheritdoc}
      */
-    public function instantiateModel($object)
+    protected function instantiateModel($object)
     {
         /* @var Foo $object */
         return new FooModel($object);
