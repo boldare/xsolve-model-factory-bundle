@@ -324,7 +324,7 @@ Let's assume that previously presented `Example\Foo` class object contains a
 property containing an array of `Example\Baz` class objects and we want this
 association to be carried to model objects as well. If both `Example\FooModelFactory`
 and `Example\BazModelFactory` are a part of the same model factory collection
-and instances of `Example\FooModel` class are instantiated via collections
+and instances of `Example\FooModel` class are instantiated via collection's
 `createModel` or `createModels` methods of this collection, implementation of
 `Example\FooModel` class could look as follows:
 
