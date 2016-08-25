@@ -7,7 +7,9 @@ use Xsolve\ModelFactoryBundle\ModelFactory\ModelFactoryInterface;
 interface ModelFactoryCollectionInterface extends ModelFactoryInterface
 {
     /**
-     * {@inheritdoc}
+     * @param ModelFactoryInterface $modelFactory
+     * 
+     * @return $this
      */
     public function addModelFactory(ModelFactoryInterface $modelFactory);
 }
