@@ -128,7 +128,7 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
     /**
      * @param array|Traversable $objects
      *
-     * @return ModelFactoryInterface
+     * @return ModelFactoryInterface|null
      */
     protected function findSupportingModelFactoryForObjects($objects)
     {
@@ -137,8 +137,6 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
                 return $modelFactory;
             }
         }
-
-        return;
     }
 
     /**
@@ -153,7 +151,5 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
                 return $modelFactory;
             }
         }
-
-        return;
     }
 }
