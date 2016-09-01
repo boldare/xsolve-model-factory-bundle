@@ -156,7 +156,7 @@ class BazModelFactory extends ModelFactory
     /**
      * @param VolumetricWeightCalculator $volumetricWeightCalculator
      */
-    public function __constructor(VolumetricWeightCalculator $volumetricWeightCalculator)
+    public function __construct(VolumetricWeightCalculator $volumetricWeightCalculator)
     {
         $this->volumetricWeightCalculator = $volumetricWeightCalculator;
     }
