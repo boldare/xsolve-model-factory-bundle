@@ -269,11 +269,11 @@ to inject them into appropriate collections. Consider following example of
     <services>
 
         <service id="example.model_factory_collection.first"
-                 class="Xsolve\ModelFactoryBundle\ModelFactoryCollection\\ModelFactoryCollection\"
+                 class="Xsolve\ModelFactoryBundle\ModelFactoryCollection\ModelFactoryCollection"
         />
 
         <service id="example.model_factory_collection.second"
-                 class="Xsolve\ModelFactoryBundle\ModelFactoryCollection\\ModelFactoryCollection\"
+                 class="Xsolve\ModelFactoryBundle\ModelFactoryCollection\ModelFactoryCollection"
         />
 
         <service id="example.model_factory.foo"
