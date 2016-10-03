@@ -81,7 +81,7 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
             $modelFactory = $this->findSupportingModelFactoryForObject($object);
             if (!$modelFactory instanceof ModelFactoryInterface) {
                 throw new ModelFactoryCollectionException(sprintf(
-                    'Model factory for class \'%s\' not found.',
+                    'Model factory for class %s not found.',
                     get_class($object)
                 ));
             }
