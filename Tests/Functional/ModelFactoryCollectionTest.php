@@ -167,6 +167,7 @@ class ModelFactoryCollectionTest extends PHPUnit_Framework_TestCase
             [3],
             [false],
             [new stdClass()],
+            [null],
         ];
     }
 
@@ -186,7 +187,7 @@ class ModelFactoryCollectionTest extends PHPUnit_Framework_TestCase
                 new BarModelFactory()
             );
 
-        $modelFactoryCollection->createModels($invalidArgument);
+        $modelFactoryCollection->createModels([$invalidArgument]);
     }
 
     /**

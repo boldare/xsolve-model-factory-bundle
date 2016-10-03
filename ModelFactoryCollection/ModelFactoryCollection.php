@@ -71,10 +71,17 @@ class ModelFactoryCollection implements ModelFactoryCollectionInterface
         // If that fails, try to find model factory for each item individually.
         $models = [];
         foreach ($objects as $key => $object) {
+            if (!is_object($object)) {
+                throw new ModelFactoryCollectionException(sprintf(
+                    'Object expected, %s given.',
+                    gettype($object)
+                ));
+            }
+
             $modelFactory = $this->findSupportingModelFactoryForObject($object);
             if (!$modelFactory instanceof ModelFactoryInterface) {
                 throw new ModelFactoryCollectionException(sprintf(
-                    "Model factory for class '%s' not found.",
+                    'Model factory for class \'%s\' not found.',
                     get_class($object)
                 ));
             }
