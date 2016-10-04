@@ -3,18 +3,40 @@ language: php
 php:
   - 5.6
   - 7.0
+  - hhvm
 
 branches:
   only:
     - master
     - /^v\d+\.\d+\.\d+$/
 
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.6
+      env: SYMFONY=2.3.*
+    - php: 5.6
+      env: SYMFONY=2.7.*
+    - php: 5.6
+      env: SYMFONY=2.8.*
+    - php: 5.6
+      env: SYMFONY=3.0.*
+    - php: 7.0
+      env: SYMFONY=3.0.*
+    - php: 7.0
+      env: SYMFONY=3.1.*
+  allow_failures:
+    - php: hhvm
+
 cache:
   directories:
     - vendor/
+    - $HOME/.composer/cache
 
 before_install:
+  - phpenv config-rm xdebug.ini || echo "xdebug not available"
   - composer self-update
+  - if [ "$SYMFONY" != "" ]; then composer require "symfony/framework-bundle:$SYMFONY" --no-update; fi;
 
 install: 
   - cp phpunit.xml.dist phpunit.xml
