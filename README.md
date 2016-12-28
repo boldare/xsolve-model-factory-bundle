@@ -10,7 +10,7 @@ Table of contents
     * [Implementing model factory](#implementing-model-factory)
     * [Using external dependencies in model](#using-external-dependencies-in-model)
     * [Grouping model factories into collections](#grouping-model-factories-into-collections)
-    * [Producing models inside other models](#producing-models-inside-other-models)
+    * [Creating nested models](#creating-nested-models)
 
 Introduction
 ============
@@ -303,8 +303,8 @@ processed by
 and `model-factory-collection-id` attribute containing service ids of
 respective collections.
 
-Producing models inside other models
-------------------------------------
+Creating nested models
+----------------------
 
 In some cases the models you would like to produce can contain other models
 (e.g. produced for objects associated with the root object). If this nesting
