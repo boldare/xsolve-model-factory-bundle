@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/xsolve-pl/xsolve-model-factory-bundle.svg?branch=master)](https://travis-ci.org/xsolve-pl/xsolve-model-factory-bundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/xsolve-pl/xsolve-model-factory-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/xsolve-pl/xsolve-model-factory-bundle/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/xsolve-pl/model-factory-bundle/v/stable)](https://packagist.org/packages/xsolve-pl/model-factory-bundle)
+[![Total Downloads](https://poser.pugx.org/xsolve-pl/model-factory-bundle/downloads)](https://packagist.org/packages/xsolve-pl/model-factory-bundle)
+[![Monthly Downloads](https://poser.pugx.org/xsolve-pl/model-factory-bundle/d/monthly)](https://packagist.org/packages/xsolve-pl/model-factory-bundle)
+[![License](https://poser.pugx.org/xsolve-pl/model-factory-bundle/license)](https://packagist.org/packages/xsolve-pl/model-factory-bundle)
 
 Table of contents
 =================
