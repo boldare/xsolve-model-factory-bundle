@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/xsolve-pl/xsolve-model-factory-bundle.svg?branch=master)](https://travis-ci.org/xsolve-pl/xsolve-model-factory-bundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/xsolve-pl/xsolve-model-factory-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/xsolve-pl/xsolve-model-factory-bundle/?branch=master)
 
 Table of contents
 =================
