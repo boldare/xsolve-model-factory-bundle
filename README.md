@@ -104,7 +104,7 @@ class FooModelFactory extends ModelFactory
     /**
      * {@inheritdoc}
      */
-    public function supports($object)
+    public function supportsObject($object)
     {
         return ($object instanceof Foo);
     }
@@ -177,7 +177,7 @@ class BazModelFactory extends ModelFactory
     /**
      * {@inheritdoc}
      */
-    public function supports($object)
+    public function supportsObject($object)
     {
         return ($object instanceof Baz);
     }
