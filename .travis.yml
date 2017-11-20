@@ -1,49 +1,88 @@
 language: php
 
-php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - hhvm
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - vendor/
 
 branches:
   only:
     - master
+    - develop
     - /^v\d+\.\d+\.\d+$/
 
 matrix:
   fast_finish: true
   include:
     - php: 5.6
-      env: SYMFONY=2.3.*
+      env:
+        - SYMFONY=2.3.*
+        - PHPSTAN=false
     - php: 5.6
-      env: SYMFONY=2.7.*
+      env:
+        - SYMFONY=2.7.*
+        - PHPSTAN=false
     - php: 5.6
-      env: SYMFONY=2.8.*
+      env:
+        - SYMFONY=2.8.*
+        - PHPSTAN=false
     - php: 5.6
-      env: SYMFONY=3.0.*
+      env:
+        - SYMFONY=3.0.*
+        - PHPSTAN=false
     - php: 7.0
-      env: SYMFONY=3.0.*
-    - php: 7.0
-      env: SYMFONY=3.2.*
+      env:
+        - SYMFONY=3.0.*
+        - PHPSTAN=true
     - php: 7.1
-      env: SYMFONY=3.2.*
-  allow_failures:
-    - php: hhvm
-
-cache:
-  directories:
-    - vendor/
-    - $HOME/.composer/cache
+      env:
+        - SYMFONY=3.0.*
+        - PHPSTAN=true
+    - php: 5.6
+      env:
+        - SYMFONY=3.2.*
+        - PHPSTAN=false
+    - php: 7.1
+      env:
+        - SYMFONY=3.2.*
+        - PHPSTAN=true
+    - php: 7.2
+      env:
+        - SYMFONY=3.2.*
+        - PHPSTAN=true
+    - php: 5.6
+      env:
+        - SYMFONY=3.4.*
+        - PHPSTAN=false
+    - php: 7.1
+      env:
+        - SYMFONY=3.4.*
+        - PHPSTAN=true
+    - php: 7.2
+      env:
+        - SYMFONY=3.4.*
+        - PHPSTAN=true
+    - php: 7.1
+      env:
+        - SYMFONY=^4
+        - PHPSTAN=true
+    - php: 7.2
+      env:
+        - SYMFONY=^4
+        - PHPSTAN=true
 
 before_install:
-  - phpenv config-rm xdebug.ini || echo "xdebug not available"
+  - phpenv config-rm xdebug.ini || echo "XDebug disabled."
   - composer self-update
   - if [ "$SYMFONY" != "" ]; then composer require "symfony/framework-bundle:$SYMFONY" --no-update; fi;
 
 install: 
   - cp phpunit.xml.dist phpunit.xml
   - composer install
+  - if [[ ${PHPSTAN} == "true" ]]; then composer require --dev phpstan/phpstan; fi
 
 script:
   - vendor/phpunit/phpunit/phpunit -c phpunit.xml Tests/ 
+  - if [[ ${PHPSTAN} == "true" ]]; then vendor/bin/phpstan analyse -l 7 -c phpstan.neon DependencyInjection/ XsolveModelFactoryBundle.php ; fi
