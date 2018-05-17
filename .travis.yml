@@ -85,4 +85,4 @@ install:
 
 script:
   - vendor/phpunit/phpunit/phpunit -c phpunit.xml Tests/ 
-  - if [[ ${PHPSTAN} == "true" ]]; then vendor/bin/phpstan analyse -l 7 -c phpstan.neon DependencyInjection/ XsolveModelFactoryBundle.php ; fi
+  - if [[ ${PHPSTAN} == "true" ]]; then vendor/bin/phpstan analyse -l 7 DependencyInjection/ XsolveModelFactoryBundle.php ; fi
