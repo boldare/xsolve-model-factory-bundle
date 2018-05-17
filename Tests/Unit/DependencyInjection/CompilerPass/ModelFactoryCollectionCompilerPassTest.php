@@ -11,7 +11,10 @@ use Xsolve\ModelFactoryBundle\DependencyInjection\CompilerPass\ModelFactoryColle
 
 class ModelFactoryCollectionCompilerPassTest extends PHPUnit_Framework_TestCase
 {
-    public function test_build()
+    /**
+     * @test
+     */
+    public function will_inject_factories_into_collections()
     {
         $modelFactoryServiceIdToTags = [
             'model_factory.foo' => [
