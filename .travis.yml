@@ -16,61 +16,13 @@ branches:
 matrix:
   fast_finish: true
   include:
-    - php: 5.6
+    - php: 7.4
       env:
-        - SYMFONY=2.3.*
-        - PHPSTAN=false
-    - php: 5.6
-      env:
-        - SYMFONY=2.7.*
-        - PHPSTAN=false
-    - php: 5.6
-      env:
-        - SYMFONY=2.8.*
-        - PHPSTAN=false
-    - php: 5.6
-      env:
-        - SYMFONY=3.0.*
-        - PHPSTAN=false
-    - php: 7.0
-      env:
-        - SYMFONY=3.0.*
+        - SYMFONY=4.4.*
         - PHPSTAN=true
-    - php: 7.1
+    - php: 8.0
       env:
-        - SYMFONY=3.0.*
-        - PHPSTAN=true
-    - php: 5.6
-      env:
-        - SYMFONY=3.2.*
-        - PHPSTAN=false
-    - php: 7.1
-      env:
-        - SYMFONY=3.2.*
-        - PHPSTAN=true
-    - php: 7.2
-      env:
-        - SYMFONY=3.2.*
-        - PHPSTAN=true
-    - php: 5.6
-      env:
-        - SYMFONY=3.4.*
-        - PHPSTAN=false
-    - php: 7.1
-      env:
-        - SYMFONY=3.4.*
-        - PHPSTAN=true
-    - php: 7.2
-      env:
-        - SYMFONY=3.4.*
-        - PHPSTAN=true
-    - php: 7.1
-      env:
-        - SYMFONY=^4
-        - PHPSTAN=true
-    - php: 7.2
-      env:
-        - SYMFONY=^4
+        - SYMFONY=4.4.*
         - PHPSTAN=true
 
 before_install:
