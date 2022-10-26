@@ -15,11 +15,8 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
-    {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('xsolve_model_factory');
-
-        return $treeBuilder;
-    }
+  public function getConfigTreeBuilder()
+  {
+      return new TreeBuilder('xsolve_model_factory');
+  }
 }
