@@ -17,6 +17,14 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
+        // for symfony < 5.0
+        if (method_exists(TreeBuilder::class, 'root')) {
+            $treeBuilder = new TreeBuilder();
+            $treeBuilder->root('xsolve_model_factory');
+
+            return $treeBuilder;
+        }
+
         return new TreeBuilder('xsolve_model_factory');
     }
 }
