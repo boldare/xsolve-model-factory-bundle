@@ -1,0 +1,35 @@
+name: Run tests and analytics
+on:
+  pull_request:
+    branches:
+      - 'master'
+      - 'develop'
+      - 'v*.*.*'
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        php_version: [7.4, 8.0]
+        symfony: [4.4, 5]
+        coverage: [none, pcov]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Setup PHP with composer.
+        uses: shivammathur/setup-php@2.22.0
+        with:
+          php-version: ${{matrix.php_version}}
+          tools: composer:v2
+          coverage: ${{matrix.coverage}} # XDebug disabled
+      - name: Install composer dependencies
+        run: |
+          cp phpunit.xml.dist phpunit.xml
+          composer require symfony/framework-bundle:${{matrix.symfony}} --no-update
+          composer require --dev phpstan/phpstan
+          composer install
+      - name: Run tests and analytics
+        run: |
+          vendor/phpunit/phpunit/phpunit -c phpunit.xml Tests/
+          vendor/bin/phpstan analyse -l 7 DependencyInjection/ XsolveModelFactoryBundle.php
