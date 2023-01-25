@@ -2,14 +2,14 @@
 
 namespace Xsolve\ModelFactoryBundle\Tests\Unit\DependencyInjection\CompilerPass;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Xsolve\ModelFactoryBundle\DependencyInjection\CompilerPass\ModelFactoryCollectionCompilerPass;
 
-class ModelFactoryCollectionCompilerPassTest extends PHPUnit_Framework_TestCase
+class ModelFactoryCollectionCompilerPassTest extends TestCase
 {
     /**
      * @test
@@ -38,9 +38,10 @@ class ModelFactoryCollectionCompilerPassTest extends PHPUnit_Framework_TestCase
                         count($args) === 1
                         && $args[0] instanceof Reference
                         && (string) $args[0] === 'model_factory.foo'
-                    ;
+                        ;
                 })
             )
+            ->willReturn($modelFactoryCollectionDefinitionFirst->reveal())
             ->shouldBeCalledTimes(1);
         $modelFactoryCollectionDefinitionFirst
             ->addMethodCall(
@@ -50,9 +51,10 @@ class ModelFactoryCollectionCompilerPassTest extends PHPUnit_Framework_TestCase
                         count($args) === 1
                         && $args[0] instanceof Reference
                         && (string) $args[0] === 'model_factory.bar'
-                    ;
+                        ;
                 })
             )
+            ->willReturn($modelFactoryCollectionDefinitionFirst->reveal())
             ->shouldBeCalledTimes(1);
         $modelFactoryCollectionDefinitionFirst = $modelFactoryCollectionDefinitionFirst->reveal();
 
@@ -65,9 +67,10 @@ class ModelFactoryCollectionCompilerPassTest extends PHPUnit_Framework_TestCase
                         count($args) === 1
                         && $args[0] instanceof Reference
                         && (string) $args[0] === 'model_factory.bar'
-                    ;
+                        ;
                 })
             )
+            ->willReturn($modelFactoryCollectionDefinitionSecond->reveal())
             ->shouldBeCalledTimes(1);
         $modelFactoryCollectionDefinitionSecond
             ->addMethodCall(
@@ -77,9 +80,10 @@ class ModelFactoryCollectionCompilerPassTest extends PHPUnit_Framework_TestCase
                         count($args) === 1
                         && $args[0] instanceof Reference
                         && (string) $args[0] === 'model_factory.baz'
-                    ;
+                        ;
                 })
             )
+            ->willReturn($modelFactoryCollectionDefinitionSecond->reveal())
             ->shouldBeCalledTimes(1);
         $modelFactoryCollectionDefinitionSecond = $modelFactoryCollectionDefinitionSecond->reveal();
 
